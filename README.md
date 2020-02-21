@@ -1,29 +1,41 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This project exists to log all actions that happen on the Sunflower Labs products.
 
-### What is this repository for? ###
+## How do I get set up? ##
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+### Installation
 
-### How do I get set up? ###
+```
+npm install
+```
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### Setup
 
-### Contribution guidelines ###
+Create .env file
 
-* Writing tests
-* Code review
-* Other guidelines
+```
+PORT=PORT
+AUTH0_AUDIENCE=AUTH0_AUDIENCE
+AUTH0_DOMAIN=AUTH0_DOMAIN
+AUTH0_CLIENT_ID=AUTH0_CLIENT_ID
+AUTH0_CLIENT_SECRET=AUTH0_CLIENT_SECRET
+```
 
-### Who do I talk to? ###
+### Execution
 
-* Repo owner or admin
-* Other community or team contact
+```
+npm start
+npm run dev
+nodemon DEBUG=queen-logs:* ./bin/www
+bash exec.sh
+docker-compose up
+```
+
+## Contribution guidelines ##
+
+TBD
+
+## Who do I talk to? ##
+
+Nuno Barreto <nuno@sunflowerlabs.com>

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  queen-logs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - "${PORT}:${PORT}"
+    command: npm start
