@@ -4,6 +4,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
+// Load .env variables.
+require('dotenv').config();
+
 if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
   throw 'Make sure you have AUTH0_DOMAIN, and AUTH0_AUDIENCE in your .env file';
 }
@@ -14,7 +17,7 @@ const apiRouter = require('./routes/api');
 const app = express();
 
 const corsOptions =  {
-  origin: 'http://localhost:3000'
+  origin: 'http://localhost'
 };
 app.use(cors(corsOptions));
 
