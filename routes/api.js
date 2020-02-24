@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const axios = require('axios');
 const jwt = require('express-jwt');
 const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
@@ -22,10 +23,76 @@ const checkJwt = jwt({
 const checkScopes = jwtAuthz(['read:messages']);
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', checkJwt, checkScopes, function(req, res, next) {
   res.json({
     message: 'Hello'
   });
+});
+
+/* POST get token */
+router.post('/authenticate', async function(req, res, next) {
+
+  const client_id = req.body.client_id;
+  const client_secret = req.body.client_secret;
+
+  if (!client_id) {
+
+    return res.status(400).json({
+      'error': {
+        'status': 400,
+        'statusText': 'Bad Request',
+        'message': 'The body parameter client_id is mandatory.'
+      }
+    });
+
+  }
+
+  if (!client_secret) {
+
+    return res.status(400).json({
+      'error': {
+        'status': 400,
+        'statusText': 'Bad Request',
+        'message': 'The body parameter client_secret is mandatory.'
+      }
+    });
+
+  }
+
+  try {
+
+    const result = await axios.post('https://dev-u399twkx.eu.auth0.com/oauth/token', {
+      'grant_type': 'client_credentials',
+      'client_id': client_id,
+      'client_secret': client_secret,
+      'audience': 'https://queen-api.sunflower-labs.com'
+    }, {
+      'headers': {
+        'content-type': 'application/json'
+      }
+    });
+  
+    res.json({
+      'token': {
+        'access_token': result.data.access_token,
+        'token_type': result.data.token_type,
+        'scope': result.data.scope,
+        'expires_in': result.data.expires_in
+      }
+    });
+
+  } catch (error) {
+
+    res.status(error.response.status).json({
+      'error': {
+        'status': error.response.status,
+        'statusText': error.response.statusText,
+        'message': error.message
+      }
+    });
+
+  }
+
 });
 
 module.exports = router;
