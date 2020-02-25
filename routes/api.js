@@ -147,7 +147,7 @@ router.get('/logs/:id', checkJwt, checkScopes, function (req, res, next) {
  * @route GET /api/v1/logs/{quantity}/{offset}?order={order}&order={order}&level={level}&tags=[{tag}]&start={start}&end={end}
  * @header Authorization: Bearer {token}
  *
- * @example GET /api/v1/logs/123/100/0?order=timestamp&order=desc&level=debug&tags=['honeycomb','sunflowers']&start=1582633163&end=1582633163
+ * @example GET /api/v1/logs/100/0?order=timestamp&order=desc&level=debug&tags=['honeycomb','sunflowers']&start=1582633163&end=1582633163
  * 
  * @param {object} req Representation of the HTTP request received.
  * @param {object} res Representation of the HTTP response sent.
