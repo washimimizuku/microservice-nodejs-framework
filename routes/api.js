@@ -22,14 +22,23 @@ const checkJwt = jwt({
 
 const checkScopes = jwtAuthz(['read:messages']);
 
-/* GET home page. */
-router.get('/', checkJwt, checkScopes, function (req, res, next) {
-  res.json({
-    message: 'Hello'
-  });
-});
-
-/* POST get token */
+/**
+ * @description Ask for a new token.
+ *
+ * @route POST /api/v1/authenticate
+ *
+ * @example POST /api/v1/authenticate
+ * {
+ *   "client_id": "CLIENT_ID",
+ *   "client_secret": "CLIENT_SECRET"
+ * }
+ *
+ * @param {object} req Representation of the HTTP request received.
+ * @param {object} res Representation of the HTTP response sent.
+ * @param {function} next Callback.
+ *
+ * @returns {void}
+ */
 router.post('/authenticate', async function (req, res, next) {
 
   const client_id = req.body.client_id;
@@ -80,6 +89,76 @@ router.post('/authenticate', async function (req, res, next) {
     return next(error);
 
   }
+
+});
+
+/**
+ * @description Create new log entry.
+ *
+ * @route POST /api/v1/logs
+ * @header Authorization: Bearer {token}
+ *
+ * @example POST /api/v1/logs
+ * {
+ *   "timestamp": 1582629861,
+ *   "tags": ["tag1", "tag2"],
+ *   "data": {
+ *     "everything": "is possible"
+ *   }
+ * }
+ * 
+ * @param {object} req Representation of the HTTP request received.
+ * @param {object} res Representation of the HTTP response sent.
+ *
+ * @returns {void}
+ */
+router.post('/logs', checkJwt, checkScopes, function (req, res, next) {
+
+  res.json({
+    message: 'POST /api/v1/logs'
+  });
+
+});
+
+/**
+ * @description Get log entry by id.
+ *
+ * @route GET /api/v1/logs/{id}
+ * @header Authorization: Bearer {token}
+ *
+ * @example GET /api/v1/logs/123
+ * 
+ * @param {object} req Representation of the HTTP request received.
+ * @param {object} res Representation of the HTTP response sent.
+ *
+ * @returns {void}
+ */
+router.get('/logs/:id', checkJwt, checkScopes, function (req, res, next) {
+
+  res.json({
+    message: 'GET /api/v1/logs/:id'
+  });
+
+});
+
+/**
+ * @description Get list of log entries.
+ *
+ * @route GET /api/v1/logs/{quantity}/{offset}?order={order}&order={order}&level={level}&tags=[{tag}]&start={start}&end={end}
+ * @header Authorization: Bearer {token}
+ *
+ * @example GET /api/v1/logs/123/100/0?order=timestamp&order=desc&level=debug&tags=['honeycomb','sunflowers']&start=1582633163&end=1582633163
+ * 
+ * @param {object} req Representation of the HTTP request received.
+ * @param {object} res Representation of the HTTP response sent.
+ *
+ * @returns {void}
+ */
+router.get('/logs/:id', checkJwt, checkScopes, function (req, res, next) {
+
+  res.json({
+    message: 'GET /api/v1/logs/:id'
+  });
 
 });
 

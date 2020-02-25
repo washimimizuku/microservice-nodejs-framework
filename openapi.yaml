@@ -11,70 +11,6 @@ servers:
         url: /api/v1
         description: ''
 paths:
-    /logs:
-        get:
-            parameters:
-                -
-                    name: limit
-                    description: ''
-                    schema:
-                        type: integer
-                    in: query
-                    required: false
-                -
-                    name: skip
-                    description: ''
-                    schema:
-                        type: integer
-                    in: query
-                    required: false
-                -
-                    name: level
-                    description: ''
-                    schema:
-                        type: string
-                    in: query
-                -
-                    name: tags
-                    description: ''
-                    schema:
-                        type: array
-                        items:
-                            type: string
-                    in: query
-                -
-                    name: startTimestamp
-                    description: ''
-                    schema:
-                        type: integer
-                    in: query
-                -
-                    name: endTimestamp
-                    description: ''
-                    schema:
-                        type: integer
-                    in: query
-                    required: false
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    $ref: '#/components/schemas/LogEntry'
-                    description: Log entries correctly retrieved.
-            summary: List logs
-        post:
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/LogEntry'
-                required: true
-            responses:
-                '201':
-                    description: New log entry created.
     '/logs/{id}':
         get:
             responses:
@@ -84,28 +20,6 @@ paths:
                             schema:
                                 $ref: '#/components/schemas/LogEntry'
                     description: Log Entry correctly retrieved.
-        put:
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/LogEntry'
-                required: true
-            responses:
-                '200':
-                    description: Log entry correctly updated.
-        delete:
-            responses:
-                '204':
-                    description: Log entry correctly deleted.
-        patch:
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/LogEntry'
-                    description: Log Entry correctly modified.
         parameters:
             -
                 name: id
@@ -129,6 +43,81 @@ paths:
                     description: The body parameters client_id and client_secret are mandatory.
                 '401':
                     description: Request failed with status code 401.
+    '/logs/{quantity}/{offset}':
+        get:
+            parameters:
+                -
+                    name: quantity
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+                -
+                    name: offset
+                    schema:
+                        type: integer
+                    in: path
+                    required: true
+                -
+                    name: order
+                    description: ''
+                    schema:
+                        type: string
+                    in: query
+                -
+                    name: direction
+                    description: ''
+                    schema:
+                        enum:
+                            - asc
+                            - desc
+                        type: string
+                    in: query
+                -
+                    name: tags
+                    description: ''
+                    schema:
+                        type: array
+                        items: {}
+                    in: query
+                -
+                    name: level
+                    description: ''
+                    schema:
+                        type: string
+                    in: query
+                -
+                    name: start
+                    description: ''
+                    schema:
+                        type: integer
+                    in: query
+                -
+                    name: end
+                    description: ''
+                    schema:
+                        type: integer
+                    in: query
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/LogEntry'
+                    description: Log entries correctly retrieved.
+    /logs:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LogEntry'
+                required: true
+            responses:
+                '201':
+                    description: New log entry created.
 components:
     schemas:
         LogEntry:
@@ -150,7 +139,7 @@ components:
                         anything:
                             type: string
             example:
-                timestamp: 945039583490534
+                timestamp: 1582632523
                 tags:
                     - honeycomb
                     - microbridge
