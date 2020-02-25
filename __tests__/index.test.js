@@ -25,14 +25,14 @@ describe('Index page', () => {
         .expect('Content-Type', /html/)
         .expect(200)
         .expect(/Welcome to Sunflower Logs/)
-        .end(function(err, res) {
+        .end(function (err, res) {
 
           if (err) throw err;
 
           expect(res.text).toContain('Welcome to Sunflower Logs');
 
           done();
-        
+
         });
 
     });

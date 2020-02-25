@@ -23,14 +23,14 @@ const checkJwt = jwt({
 const checkScopes = jwtAuthz(['read:messages']);
 
 /* GET home page. */
-router.get('/', checkJwt, checkScopes, function(req, res, next) {
+router.get('/', checkJwt, checkScopes, function (req, res, next) {
   res.json({
     message: 'Hello'
   });
 });
 
 /* POST get token */
-router.post('/authenticate', async function(req, res, next) {
+router.post('/authenticate', async function (req, res, next) {
 
   const client_id = req.body.client_id;
   const client_secret = req.body.client_secret;
@@ -65,7 +65,7 @@ router.post('/authenticate', async function(req, res, next) {
         'content-type': 'application/json'
       }
     });
-  
+
     return res.json({
       'token': {
         'access_token': result.data.access_token,

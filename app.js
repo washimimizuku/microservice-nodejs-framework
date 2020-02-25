@@ -17,7 +17,7 @@ const apiRouter = require('./routes/api');
 
 const app = express();
 
-const corsOptions =  {
+const corsOptions = {
   origin: 'http://localhost'
 };
 app.use(cors(corsOptions));
@@ -26,40 +26,44 @@ const OpenApiValidator = require('express-openapi-validator').OpenApiValidator;
 
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 new OpenApiValidator({
-  apiSpec: './openapi.yaml',
-  validateRequests: true, // (default)
-  validateResponses: true, // false by default
-}).install(app)
-.then(() => {
+    apiSpec: './openapi.yaml',
+    validateRequests: true, // (default)
+    validateResponses: true, // false by default
+  }).install(app)
+  .then(() => {
 
-  app.use('/api/v1/', apiRouter);
+    app.use('/api/v1/', apiRouter);
 
-  app.use((error, req, res, next) => {
-    
-    const errorStatus = error.response ? error.response.status : error.status;
-    const errorObject = {
-      'error': {
-        'status': errorStatus,
-        'statusText': httpStatus[errorStatus],
-        'message': error.message,
-        'errors': error.errors
-      }
-    };
+    app.use((error, req, res, next) => {
 
-    // format error
-    res.status(errorStatus || 500).json(errorObject);
+      const errorStatus = error.response ? error.response.status : error.status;
+      const errorObject = {
+        'error': {
+          'status': errorStatus,
+          'statusText': httpStatus[errorStatus],
+          'message': error.message,
+          'errors': error.errors
+        }
+      };
+
+      // format error
+      res.status(errorStatus || 500).json(errorObject);
+
+    });
 
   });
-
-});
 
 module.exports = app;
