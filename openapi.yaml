@@ -1,0 +1,170 @@
+openapi: 3.0.2
+info:
+    title: Sunflower Log
+    version: 1.0.0
+    description: A service to log all activities on Sunflower Labs apps.
+    contact:
+        name: Nuno Barreto
+        email: nuno@sunflower-labs.com
+servers:
+    -
+        url: /api/v1
+        description: ''
+paths:
+    /logs:
+        get:
+            parameters:
+                -
+                    name: limit
+                    description: ''
+                    schema:
+                        type: integer
+                    in: query
+                    required: false
+                -
+                    name: skip
+                    description: ''
+                    schema:
+                        type: integer
+                    in: query
+                    required: false
+                -
+                    name: level
+                    description: ''
+                    schema:
+                        type: string
+                    in: query
+                -
+                    name: tags
+                    description: ''
+                    schema:
+                        type: array
+                        items:
+                            type: string
+                    in: query
+                -
+                    name: startTimestamp
+                    description: ''
+                    schema:
+                        type: integer
+                    in: query
+                -
+                    name: endTimestamp
+                    description: ''
+                    schema:
+                        type: integer
+                    in: query
+                    required: false
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                type: array
+                                items:
+                                    $ref: '#/components/schemas/LogEntry'
+                    description: Log entries correctly retrieved.
+            summary: List logs
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LogEntry'
+                required: true
+            responses:
+                '201':
+                    description: New log entry created.
+    '/logs/{id}':
+        get:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LogEntry'
+                    description: Log Entry correctly retrieved.
+        put:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/LogEntry'
+                required: true
+            responses:
+                '200':
+                    description: Log entry correctly updated.
+        delete:
+            responses:
+                '204':
+                    description: Log entry correctly deleted.
+        patch:
+            responses:
+                '200':
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/LogEntry'
+                    description: Log Entry correctly modified.
+        parameters:
+            -
+                name: id
+                description: Id of the Log entry
+                schema:
+                    type: integer
+                in: path
+                required: true
+    /authenticate:
+        post:
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/AuthenticationClient'
+                required: true
+            responses:
+                '200':
+                    description: Authentication token correctly received.
+                '400':
+                    description: The body parameters client_id and client_secret are mandatory.
+                '401':
+                    description: Request failed with status code 401.
+components:
+    schemas:
+        LogEntry:
+            title: Root Type for LogEntry
+            description: ''
+            required:
+                - data
+            type: object
+            properties:
+                timestamp:
+                    format: int32
+                    type: integer
+                tags:
+                    type: array
+                    items:
+                        type: string
+                data:
+                    properties:
+                        anything:
+                            type: string
+            example:
+                timestamp: 945039583490534
+                tags:
+                    - honeycomb
+                    - microbridge
+                data:
+                    anything: is possible
+        AuthenticationClient:
+            title: Root Type for AuthenticationClient
+            description: ''
+            type: object
+            properties:
+                client_id:
+                    type: string
+                client_secret:
+                    type: string
+            example:
+                client_id: SOME_CLIENT_ID
+                client_secret: SOME_CLIENT_SECRET

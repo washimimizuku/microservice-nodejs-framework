@@ -18,7 +18,7 @@ describe('Index page', () => {
 
   describe('Homepage', () => {
 
-    test('Should exist', async () => {
+    test('Should exist', async (done) => {
 
       request(app)
         .get('/')
@@ -26,7 +26,13 @@ describe('Index page', () => {
         .expect(200)
         .expect(/Welcome to Sunflower Logs/)
         .end(function(err, res) {
+
           if (err) throw err;
+
+          expect(res.text).toContain('Welcome to Sunflower Logs');
+
+          done();
+        
         });
 
     });

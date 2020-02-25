@@ -107,7 +107,32 @@ describe('API', () => {
           
           expect(res.body.error.status).toBe(401);
           expect(res.body.error.statusText).toBe('Unauthorized');
-          expect(res.body.error.message).toBe('Request failed with status code 401.');
+          expect(res.body.error.message).toBe('Request failed with status code 401');
+          
+          done();
+        
+        });
+
+    });
+
+    test('When given wrong type for client_id and client_secret, it should return an error', async (done) => {
+
+      request(app)
+        .post('/api/v1/authenticate/')
+        .send({
+          'client_id': ['UNKOWN_CLIENT_ID'],
+          'client_secret': ['UNKOWN_CLIENT_SECRET']
+        })
+        .set('Accept', 'application/json')
+        .expect('Content-Type', /json/)
+        .expect(400)
+        .end(function(err, res) {
+
+          if (err) throw err;
+          
+          expect(res.body.error.status).toBe(400);
+          expect(res.body.error.statusText).toBe('Bad Request');
+          expect(res.body.error.message).toBe('request.body.client_id should be string, request.body.client_secret should be string');
           
           done();
         

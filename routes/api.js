@@ -37,24 +37,18 @@ router.post('/authenticate', async function(req, res, next) {
 
   if (!client_id) {
 
-    return res.status(400).json({
-      'error': {
-        'status': 400,
-        'statusText': 'Bad Request',
-        'message': 'The body parameter client_id is mandatory.'
-      }
+    return next({
+      'status': 400,
+      'message': 'The body parameter client_id is mandatory.'
     });
 
   }
 
   if (!client_secret) {
 
-    return res.status(400).json({
-      'error': {
-        'status': 400,
-        'statusText': 'Bad Request',
-        'message': 'The body parameter client_secret is mandatory.'
-      }
+    return next({
+      'status': 400,
+      'message': 'The body parameter client_secret is mandatory.'
     });
 
   }
@@ -72,7 +66,7 @@ router.post('/authenticate', async function(req, res, next) {
       }
     });
   
-    res.json({
+    return res.json({
       'token': {
         'access_token': result.data.access_token,
         'token_type': result.data.token_type,
@@ -83,13 +77,7 @@ router.post('/authenticate', async function(req, res, next) {
 
   } catch (error) {
 
-    res.status(error.response.status).json({
-      'error': {
-        'status': error.response.status,
-        'statusText': error.response.statusText,
-        'message': error.message
-      }
-    });
+    return next(error);
 
   }
 
