@@ -1,5 +1,5 @@
 {
-  "name": "queen-logs",
+  "name": "queen-service-nodejs-framework",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -21,8 +21,7 @@
     "http_status_codes": "^2.0.5",
     "jwks-rsa": "^1.7.0",
     "morgan": "~1.9.1",
-    "winston": "^3.2.1",
-    "winston-syslog": "^2.4.0"
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "jest": "^25.1.0",

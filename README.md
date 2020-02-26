@@ -1,6 +1,6 @@
 # README #
 
-This project exists to log all actions that happen on the Sunflower Labs products.
+This project exists to be reused for the creation of Queen API services.
 
 ## How do I get set up? ##
 
@@ -27,7 +27,7 @@ AUTH0_CLIENT_SECRET=AUTH0_CLIENT_SECRET
 ```
 npm start
 npm run dev
-nodemon DEBUG=queen-logs:* ./bin/www
+nodemon DEBUG=queen-service-nodejs-framework:* ./bin/www
 bash exec.sh
 docker-compose up
 ```
