@@ -5,11 +5,12 @@ info:
     description: A service to log all activities on Sunflower Labs apps.
     contact:
         name: Nuno Barreto
+        url: 'https://www.sunflower-labs.com'
         email: nuno@sunflower-labs.com
 servers:
     -
         url: /api/v1
-        description: ''
+        description: 'The first version of the Sunflower Log API.'
 paths:
     /authenticate:
         post:
