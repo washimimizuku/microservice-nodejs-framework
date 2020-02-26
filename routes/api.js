@@ -22,16 +22,6 @@ const checkJwt = jwt({
 
 const checkScopes = jwtAuthz(['read:messages']);
 
-const winston = require('winston');
-require('winston-syslog').Syslog;
-
-const logger = winston.createLogger({
-  levels: winston.config.syslog.levels,
-  transports: [
-    new winston.transports.Syslog()
-  ]
-});
-
 /**
  * @description Ask for a new token.
  *
@@ -103,17 +93,14 @@ router.post('/authenticate', async function (req, res, next) {
 });
 
 /**
- * @description Create new log entry.
+ * @description Create new __QUEEN_SERVICE_NAME__ entry.
  *
- * @route POST /api/v1/log
+ * @route POST /api/v1/example
  * @header Authorization: Bearer {token}
  *
- * @example POST /api/v1/log
+ * @example POST /api/v1/example
  * {
- *   "level": "error",
- *   "message": {
- *     "everything": "is possible"
- *   }
+ *   "something": "here"
  * }
  * 
  * @param {object} req Representation of the HTTP request received.
@@ -121,9 +108,8 @@ router.post('/authenticate', async function (req, res, next) {
  *
  * @returns {void}
  */
-router.post('/log', checkJwt, checkScopes, function (req, res, next) {
+router.post('/example', checkJwt, checkScopes, function (req, res, next) {
 
-  const level = req.body.level || 'info';
   const message = req.body.message;
 
   if (!message) {
@@ -135,16 +121,9 @@ router.post('/log', checkJwt, checkScopes, function (req, res, next) {
 
   }
 
-  const log = {
-    'level': level,
-    'message': message
-  };
-
-  logger.log(log);
-
   return res.status(201).json({
-    'message': 'Log message successfully created.',
-    'log': log
+    'status': 'Successfully created.',
+    'message': message
   });
 
 });

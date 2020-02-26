@@ -147,17 +147,14 @@ describe('API', () => {
 
   });
 
-  describe('Log', () => {
+  describe('__QUEEN_SERVICE_NAME__', () => {
 
-    test('When given a correct debug message with valid authorization token it should work.', async (done) => {
+    test('With valid authorization token it should work.', async (done) => {
 
       request(app)
-        .post('/api/v1/log/')
+        .post('/api/v1/example/')
         .send({
-          'level': 'debug',
-          'message': {
-            'everything': 'is possible'
-          }
+          'message': 'This is an example.'
         })
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -168,263 +165,8 @@ describe('API', () => {
 
           if (err) throw err;
 
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('debug');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct info message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'info',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('info');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct notice message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'notice',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('notice');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct warning message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'warning',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('warning');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct error message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'error',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('error');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct crit message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'crit',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('crit');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct alert message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'alert',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('alert');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct emerg message with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'level': 'emerg',
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('emerg');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given a correct message without level with valid authorization token it should work.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({
-          'message': {
-            'everything': 'is possible'
-          }
-        })
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(201)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.message).toBe('Log message successfully created.');
-          expect(res.body.log.level).toBe('info');
-          expect(res.body.log.message.everything).toBe('is possible');
-
-          done();
-
-        });
-
-    });
-
-    test('When given an empty body it should give an error.', async (done) => {
-
-      request(app)
-        .post('/api/v1/log/')
-        .send({})
-        .set('Content-Type', 'application/json')
-        .set('Accept', 'application/json')
-        .set('Authorization', 'Bearer ' + token)
-        .expect('Content-Type', /json/)
-        .expect(400)
-        .end(function (err, res) {
-
-          if (err) throw err;
-
-          expect(res.body.error.errors[0].errorCode).toBe('required.openapi.validation');
-          expect(res.body.error.message).toContain('request.body should have required property');
+          expect(res.body.status).toBe('Successfully created.');
+          expect(res.body.message).toBe('This is an example.');
 
           done();
 
@@ -435,7 +177,7 @@ describe('API', () => {
     test('When given an empty message it should give an error.', async (done) => {
 
       request(app)
-        .post('/api/v1/log/')
+        .post('/api/v1/example/')
         .send({
           'message': ''
         })
@@ -458,14 +200,12 @@ describe('API', () => {
 
     });
 
-    test('When given a correct message without level with malformed authorization token it should give an error.', async (done) => {
+    test('With malformed authorization token it should give an error.', async (done) => {
 
       request(app)
-        .post('/api/v1/log/')
+        .post('/api/v1/example/')
         .send({
-          'message': {
-            'everything': 'is possible'
-          }
+          'message': 'This is an example.'
         })
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -484,14 +224,12 @@ describe('API', () => {
 
     });
 
-    test('When given a correct message without level with expired authorization token it should give an error.', async (done) => {
+    test('With expired authorization token it should give an error.', async (done) => {
 
       request(app)
-        .post('/api/v1/log/')
+        .post('/api/v1/example/')
         .send({
-          'message': {
-            'everything': 'is possible'
-          }
+          'message': 'This is an example.'
         })
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')
@@ -510,14 +248,12 @@ describe('API', () => {
 
     });
 
-    test('When given a correct message without level with invalid authorization token it should give an error.', async (done) => {
+    test('With invalid authorization token it should give an error.', async (done) => {
 
       request(app)
-        .post('/api/v1/log/')
+        .post('/api/v1/example/')
         .send({
-          'message': {
-            'everything': 'is possible'
-          }
+          'message': 'This is an example.'
         })
         .set('Content-Type', 'application/json')
         .set('Accept', 'application/json')

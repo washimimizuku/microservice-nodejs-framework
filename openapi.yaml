@@ -1,8 +1,8 @@
 openapi: 3.0.2
 info:
-    title: Sunflower Log
+    title: __QUEEN_SERVICE_NAME__
     version: 1.0.0
-    description: A service to log all activities on Sunflower Labs apps.
+    description: __QUEEN_SERVICE_DESCRIPTION__.
     contact:
         name: Nuno Barreto
         url: 'https://www.sunflower-labs.com'
@@ -10,7 +10,7 @@ info:
 servers:
     -
         url: /api/v1
-        description: 'The first version of the Sunflower Log API.'
+        description: 'The first version of the __QUEEN_SERVICE_NAME__.'
 paths:
     /authenticate:
         post:
@@ -27,46 +27,19 @@ paths:
                     description: The body parameters client_id and client_secret are mandatory.
                 '401':
                     description: Request failed with status code 401.
-    /log:
+    /example:
         post:
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/LogEntry'
+                            $ref: '#/components/schemas/Example'
                 required: true
             responses:
                 '201':
-                    description: New log entry created.
+                    description: New entry created.
 components:
     schemas:
-        LogEntry:
-            title: Root Type for LogEntry
-            description: ''
-            required:
-                - message
-            type: object
-            properties:
-                level:
-                    description: ''
-                    enum:
-                        - emerg
-                        - alert
-                        - crit
-                        - error
-                        - warning
-                        - notice
-                        - info
-                        - debug
-                    type: string
-                message:
-                    properties:
-                        anything:
-                            type: string
-            example:
-                level: error
-                message:
-                    anything: is possible
         AuthenticationClient:
             title: Root Type for AuthenticationClient
             description: ''
@@ -79,3 +52,12 @@ components:
             example:
                 client_id: SOME_CLIENT_ID
                 client_secret: SOME_CLIENT_SECRET
+        Example:
+            title: Root Type for Example
+            description: ''
+            type: object
+            properties:
+                message:
+                    type: string
+            example:
+                message: This is an example.
