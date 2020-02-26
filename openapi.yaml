@@ -11,23 +11,6 @@ servers:
         url: /api/v1
         description: ''
 paths:
-    '/logs/{id}':
-        get:
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/LogEntry'
-                    description: Log Entry correctly retrieved.
-        parameters:
-            -
-                name: id
-                description: Id of the Log entry
-                schema:
-                    type: integer
-                in: path
-                required: true
     /authenticate:
         post:
             requestBody:
@@ -43,71 +26,7 @@ paths:
                     description: The body parameters client_id and client_secret are mandatory.
                 '401':
                     description: Request failed with status code 401.
-    '/logs/{quantity}/{offset}':
-        get:
-            parameters:
-                -
-                    name: quantity
-                    schema:
-                        type: integer
-                    in: path
-                    required: true
-                -
-                    name: offset
-                    schema:
-                        type: integer
-                    in: path
-                    required: true
-                -
-                    name: order
-                    description: ''
-                    schema:
-                        type: string
-                    in: query
-                -
-                    name: direction
-                    description: ''
-                    schema:
-                        enum:
-                            - asc
-                            - desc
-                        type: string
-                    in: query
-                -
-                    name: tags
-                    description: ''
-                    schema:
-                        type: array
-                        items: {}
-                    in: query
-                -
-                    name: level
-                    description: ''
-                    schema:
-                        type: string
-                    in: query
-                -
-                    name: start
-                    description: ''
-                    schema:
-                        type: integer
-                    in: query
-                -
-                    name: end
-                    description: ''
-                    schema:
-                        type: integer
-                    in: query
-            responses:
-                '200':
-                    content:
-                        application/json:
-                            schema:
-                                type: array
-                                items:
-                                    $ref: '#/components/schemas/LogEntry'
-                    description: Log entries correctly retrieved.
-    /logs:
+    /log:
         post:
             requestBody:
                 content:
@@ -124,26 +43,28 @@ components:
             title: Root Type for LogEntry
             description: ''
             required:
-                - data
+                - message
             type: object
             properties:
-                timestamp:
-                    format: int32
-                    type: integer
-                tags:
-                    type: array
-                    items:
-                        type: string
-                data:
+                level:
+                    description: ''
+                    enum:
+                        - emerg
+                        - alert
+                        - crit
+                        - error
+                        - warning
+                        - notice
+                        - info
+                        - debug
+                    type: string
+                message:
                     properties:
                         anything:
                             type: string
             example:
-                timestamp: 1582632523
-                tags:
-                    - honeycomb
-                    - microbridge
-                data:
+                level: error
+                message:
                     anything: is possible
         AuthenticationClient:
             title: Root Type for AuthenticationClient
