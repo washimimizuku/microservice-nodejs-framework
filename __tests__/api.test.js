@@ -147,7 +147,7 @@ describe('API', () => {
 
   });
 
-  describe('__QUEEN_SERVICE_NAME__', () => {
+  describe('__MICROSERVICE_NAME__', () => {
 
     test('With valid authorization token it should work.', async (done) => {
 

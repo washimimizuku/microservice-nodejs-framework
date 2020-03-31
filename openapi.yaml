@@ -1,16 +1,15 @@
 openapi: 3.0.2
 info:
-    title: __QUEEN_SERVICE_NAME__
+    title: __MICROSERVICE_NAME__
     version: 1.0.0
-    description: __QUEEN_SERVICE_DESCRIPTION__.
+    description: __MICROSERVICE_DESCRIPTION__.
     contact:
         name: Nuno Barreto
-        url: 'https://www.sunflower-labs.com'
-        email: nuno@sunflower-labs.com
+        email: nbarreto@gmail.com
 servers:
     -
         url: /api/v1
-        description: 'The first version of the __QUEEN_SERVICE_NAME__.'
+        description: 'The first version of the __MICRO_SERVICE_NAME__.'
 paths:
     /authenticate:
         post:

@@ -11,7 +11,7 @@ require('dotenv').config();
  */
 
 var app = require('../app');
-var debug = require('debug')('queen-service-nodejs-framework:server');
+var debug = require('debug')('microservice-nodejs-framework:server');
 var http = require('http');
 
 /**
