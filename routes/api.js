@@ -68,7 +68,7 @@ router.post('/authenticate', async function (req, res, next) {
       'grant_type': 'client_credentials',
       'client_id': client_id,
       'client_secret': client_secret,
-      'audience': 'https://queen-api.sunflower-labs.com'
+      'audience': process.env.AUTH0_AUDIENCE
     }, {
       'headers': {
         'content-type': 'application/json'
@@ -93,7 +93,7 @@ router.post('/authenticate', async function (req, res, next) {
 });
 
 /**
- * @description Create new __QUEEN_SERVICE_NAME__ entry.
+ * @description Create new __MICROSERVICE_NAME__ entry.
  *
  * @route POST /api/v1/example
  * @header Authorization: Bearer {token}

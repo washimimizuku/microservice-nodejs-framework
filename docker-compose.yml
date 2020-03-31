@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  queen-service-nodejs-framework:
+  microservice-nodejs-framework:
     build:
       context: .
       dockerfile: Dockerfile

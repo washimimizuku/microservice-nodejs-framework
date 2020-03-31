@@ -24,12 +24,12 @@ describe('Index page', () => {
         .get('/')
         .expect('Content-Type', /html/)
         .expect(200)
-        .expect(/Welcome to __QUEEN_SERVICE_NAME__/)
+        .expect(/Welcome to __MICROSERVICE_NAME__/)
         .end(function (err, res) {
 
           if (err) throw err;
 
-          expect(res.text).toContain('Welcome to __QUEEN_SERVICE_NAME__');
+          expect(res.text).toContain('Welcome to __MICROSERVICE_NAME__');
 
           done();
 

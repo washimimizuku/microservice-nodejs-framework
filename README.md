@@ -1,6 +1,6 @@
 # README #
 
-This project exists to be reused for the creation of Queen API services.
+This project exists to serve as a framework for Node.js micro services.
 
 ## How do I get set up? ##
 
@@ -46,7 +46,7 @@ npm start launches it as a node.js proccess, while the other two launches it wit
 
 ```
 npm run dev
-nodemon DEBUG=queen-service-nodejs-framework:* ./bin/www
+nodemon DEBUG=microservice-nodejs-framework:* ./bin/www
 ```
 
 #### Testing
@@ -61,7 +61,7 @@ jest --coverage
 The coverage report can then be accessed on the browser with the following path (replace {INSTALL_PATH} with the location of the proejct folder):
 
 ```
-file:///{INSTALL_PATH}/queen-service-nodejs-framework/coverage/lcov-report/index.html
+file:///{INSTALL_PATH}/microservice-nodejs-framework/coverage/lcov-report/index.html
 ```
 
 For tests without coverage, you can simply run jest:
@@ -74,8 +74,8 @@ More information can be found here: https://jestjs.io/docs/en/getting-started
 
 ## Contribution guidelines ##
 
-Contact <chris@sunflowerlabs.com>.
+Contact <nbarreto@gmail.com>.
 
 ## Who do I talk to? ##
 
-Nuno Barreto <nuno@sunflowerlabs.com>.
+Nuno Barreto <nbarreto@gmail.com>.
