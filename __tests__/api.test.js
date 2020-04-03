@@ -4,8 +4,8 @@ describe('API', () => {
 
   var app;
   var token;
-  const expiredToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFVVkVSamczTkRNME1VVXhOa1V6TlRrMk5UWkROekZGT1VNd1FUVTVNMEZDTkVVNVFVVXdSUSJ9.eyJpc3MiOiJodHRwczovL2Rldi11Mzk5dHdreC5ldS5hdXRoMC5jb20vIiwic3ViIjoiMndPVjQzMHR3UlJCVmptS1RsYnNwaGpHV1FlTjZldU1AY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vcXVlZW4tYXBpLnN1bmZsb3dlci1sYWJzLmNvbSIsImlhdCI6MTU4MjIxMjMzNywiZXhwIjoxNTgyMjk4NzM3LCJhenAiOiIyd09WNDMwdHdSUkJWam1LVGxic3BoakdXUWVONmV1TSIsInNjb3BlIjoicmVhZDptZXNzYWdlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.BdOJv1NjZ6UeEEUdt4Su4j2_k9Icegq5PzYmPKc991Xm6KHlGBQ659MZpgQ1kaPEvT_pp7UcaRDNo4sfUxbXcezJ06hELhI-ZgplLxPP6hsNi7fVMNJ23fokcFVMZ6Med6gvpBlGUe1EZIlT8EO9M_A766uvpbXiXXn9iADM3pIRW8G-E5PUHI7adTgEUyIVjDaBjtCoIudV_ZA8ILDnveBw01kGJxtmLudykZybV4cNPv4bxrEvl8VQEAyvEmzSVIsQ8gzVbOayYgTab6XIaVJ7yYnYabQtU7851EU1sPgaRM_CXgfMXnlWUwPTbW3PICQG7ppiZALWnaf_jGYYwQ';
-  const invalidToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFVVkVSamczTkRNME1VVXhOa1V6TlRrMk5UWkROekZGT1VNd1FUVTVNMEZDTkVVNVFVVXdSUSJ9.eyJpc3MiOiJodHRwczovL2Rldi11Mzk5dHdreC5ldS5hdXRoMC5jb20vIiwic3ViIjoiMndPVjQzMHR3UlJCVmptS1RsYnNwaGpHV1FlTjZldU1AY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vcXVlZW4tYXBpLnN1bmZsb3dlci1sYWJzLmNvbSIsImlhdCI6MTU5MjIxMjMzNywiZXhwIjoxNTgyMjk4NzM3LCJhenAiOiIyd09WNDMwdHdSUkJWam1LVGxic3BoakdXUWVONmV1TSIsInNjb3BlIjoicmVhZDptZXNzYWdlcyIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.BdOJv1NjZ6UeEEUdt4Su4j2_k9Icegq5PzYmPKc991Xm6KHlGBQ659MZpgQ1kaPEvT_pp7UcaRDNo4sfUxbXcezJ06hELhI-ZgplLxPP6hsNi7fVMNJ23fokcFVMZ6Med6gvpBlGUe1EZIlT8EO9M_A766uvpbXiXXn9iADM3pIRW8G-E5PUHI7adTgEUyIVjDaBjtCoIudV_ZA8ILDnveBw01kGJxtmLudykZybV4cNPv4bxrEvl8VQEAyvEmzSVIsQ8gzVbOayYgTab6XIaVJ7yYnYabQtU7851EU1sPgaRM_CXgfMXnlWUwPTbW3PICQG7ppiZALWnaf_jGYYwQ';
+  const expiredToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFUU2hGQnhEd0ttbUhfYnphY0cxbSJ9.eyJpc3MiOiJodHRwczovL2Rldi0teTBqbzRnOS5ldS5hdXRoMC5jb20vIiwic3ViIjoiOGZUMmhnWnlNV2xsYm5pY1FlZzJWYzFIZ3JOSjhPd29AY2xpZW50cyIsImF1ZCI6Imh0dHA6Ly93YXNoaW1pbWl6dWt1LmdpdGh1Yi5pby8iLCJpYXQiOjE1ODU5MTExOTEsImV4cCI6MTU4NTk5NzU5MSwiYXpwIjoiOGZUMmhnWnlNV2xsYm5pY1FlZzJWYzFIZ3JOSjhPd28iLCJzY29wZSI6InJlYWQgd3JpdGUiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.tMBOErvsnztUt6tIJwIaVVEmpL0rHTiZD9dTVHJ0MWuh0RtpM1o8fmeQNPw0lmQEpMwSq-i_pB9OcEzK-wQ0L531FjgULmltzp65Wa59asML44x0XHL-zOosPWO5V1R1Qddhmg7_lurNdF2YDwcOvQHn-9AeK155bypSDZOPpJ0L8FHk8qhyQPRTtpl00beGltNXKAEw1Gyh6a9p6gqID5QRGF1IWOKTB73d-Ok_bUj1L4OfNYJ4NikH-BOhfhjFA4uVXFOge3aARpYxwEJ_x8J7CqaE3PRjPYJQCJ5ITKCnVzzSxdPNJAQ08inmf1bglFPABGyOBVltb6I8VVHMAA';
+  const invalidToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6I12345GQnhEd0ttbUhfYnphY0cxbSJ9.eyJpc3MiOiJodHRwczovL2Rldi0teTBqbzRnOS5ldS5hdXRoMC5jb20vIiwic3ViIjoiOGZUMmhnWnlNV2xsYm5pY1FlZzJWYzFIZ3JOSjhPd29AY2xpZW50cyIsImF1ZCI6Imh0dHA6Ly93YXNoaW1pbWl6dWt1LmdpdGh1Yi5pby8iLCJpYXQiOjE1ODU5MTExOTEsImV4cCI6MTU4NTk5NzU5MSwiYXpwIjoiOGZUMmhnWnlNV2xsYm5pY1FlZzJWYzFIZ3JOSjhPd28iLCJzY29wZSI6InJlYWQgd3JpdGUiLCJndHkiOiJjbGllbnQtY3JlZGVudGlhbHMifQ.tMBOErvsnztUt6tIJwIaVVEmpL0rHTiZD9dTVHJ0MWuh0RtpM1o8fmeQNPw0lmQEpMwSq-i_pB9OcEzK-wQ0L531FjgULmltzp65Wa59asML44x0XHL-zOosPWO5V1R1Qddhmg7_lurNdF2YDwcOvQHn-9AeK155bypSDZOPpJ0L8FHk8qhyQPRTtpl00beGltNXKAEw1Gyh6a9p6gqID5QRGF1IWOKTB73d-Ok_bUj1L4OfNYJ4NikH-BOhfhjFA4uVXFOge3aARpYxwEJ_x8J7CqaE3PRjPYJQCJ5ITKCnVzzSxdPNJAQ08inmf1bglFPABGyOBVltb6I8VVHMAA';
 
   beforeAll(function () {
 
@@ -36,9 +36,9 @@ describe('API', () => {
 
           if (err) throw err;
 
-          expect(res.body.token.access_token).toContain('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFVVkVS');
+          expect(res.body.token.access_token).toContain('eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImFUU2hG');
           expect(res.body.token.token_type).toBe('Bearer');
-          expect(res.body.token.scope).toBe('read:messages');
+          expect(res.body.token.scope).toBe('read write');
           expect(res.body.token.expires_in).toBe(86400);
 
           token = res.body.token.access_token;
@@ -264,7 +264,7 @@ describe('API', () => {
 
           if (err) throw err;
 
-          expect(res.body.error.message).toBe('invalid signature');
+          expect(res.body.error.message).toBe('invalid token');
 
           done();
 
