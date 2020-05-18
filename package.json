@@ -14,17 +14,17 @@
     "debug": "~4.1.1",
     "dotenv": "^8.2.0",
     "express": "~4.17.1",
-    "express-jwt": "^5.3.1",
+    "express-jwt": "^5.3.3",
     "express-jwt-authz": "^2.3.1",
-    "express-openapi-validator": "^3.10.0",
+    "express-openapi-validator": "^3.12.9",
     "express-winston": "^4.0.3",
     "http_status_codes": "^2.0.5",
-    "jwks-rsa": "^1.7.0",
+    "jwks-rsa": "^1.8.0",
     "morgan": "~1.10.0",
     "winston": "^3.2.1"
   },
   "devDependencies": {
-    "jest": "^25.2.4",
+    "jest": "^26.0.1",
     "supertest": "^4.0.2"
   }
 }
