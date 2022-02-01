@@ -21,7 +21,7 @@
     "http_status_codes": "^2.0.5",
     "jwks-rsa": "^1.12.3",
     "morgan": "~1.10.0",
-    "winston": "^3.3.3"
+    "winston": "^3.4.0"
   },
   "devDependencies": {
     "jest": "^26.0.1",
