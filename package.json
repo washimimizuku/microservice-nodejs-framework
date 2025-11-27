@@ -7,7 +7,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
-    "axios": "^1.6.0",
+    "axios": "^1.7.4",
     "body-parser": "^1.20.2",
     "cookie-parser": "~1.4.6",
     "cors": "^2.8.5",
@@ -21,7 +21,7 @@
     "http_status_codes": "^2.0.5",
     "jwks-rsa": "^3.1.0",
     "morgan": "~1.10.0",
-    "winston": "^3.11.0"
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "jest": "^26.0.1",
